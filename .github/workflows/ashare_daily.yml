@@ -1,0 +1,33 @@
+name: A-Share Daily Radar (A股复盘)
+
+on:
+  schedule:
+    # UTC 10:00 = 北京时间 18:00
+    # 周一到周五运行 (A股周末休市)
+    - cron: '0 10 * * 1-5'
+  workflow_dispatch: # 允许手动点击测试
+
+jobs:
+  ashare-job:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        # A股专用库 akshare
+        pip install akshare pandas requests
+
+    - name: Run A-Share Radar
+      env:
+        MAIL_USER: ${{ secrets.MAIL_USER }}
+        MAIL_PASS: ${{ secrets.MAIL_PASS }}
+        MAIL_TO: ${{ secrets.MAIL_TO }}
+      run: python ashare_radar.py
