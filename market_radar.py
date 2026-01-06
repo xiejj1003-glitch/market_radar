@@ -27,7 +27,7 @@ def send_email(content):
     message['Subject'] = subject
 
     try:
-        smtp_obj = smtplib.SMTP_SSL('smtp.163.com', 465) 
+        smtp_obj = smtplib.SMTP_SSL('smtp.qq.com', 465) 
         smtp_obj.login(mail_user, mail_pass)
         smtp_obj.sendmail(mail_user, [mail_to], message.as_string())
         print("✅ 邮件发送成功！")
