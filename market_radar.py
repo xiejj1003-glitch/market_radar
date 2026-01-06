@@ -28,10 +28,11 @@ def send_email(content):
     message['Subject'] = subject
 
     try:
-        # ⚠️ 注意：这里是用 163 邮箱，如果你用 QQ 请改回 smtp.qq.com
-        smtp_obj = smtplib.SMTP_SSL('smtp.qq.com', 465) obj.login(mail_user, mail_pass)
+        # 👇 修复点：换行，并使用 QQ 服务器
+        smtp_obj = smtplib.SMTP_SSL('smtp.qq.com', 465) 
+        smtp_obj.login(mail_user, mail_pass)
         smtp_obj.sendmail(mail_user, [mail_to], message.as_string())
-        print("✅ 战报已发送！")
+        print("✅ 美股战报已发送！")
         smtp_obj.quit()
     except Exception as e:
         print(f"❌ 发送失败: {e}")
