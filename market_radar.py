@@ -81,7 +81,7 @@ def scan_market():
     
     try:
         # 下载最近2天数据来计算涨跌幅
-        data = yf.download(tickers, period="5d", interval="1d", group_by='ticker', threads=True, progress=False)
+        data = yf.download(tickers, period="5d", interval="1d", group_by='ticker', threads=False, progress=False)
         
         market_data = []
         
