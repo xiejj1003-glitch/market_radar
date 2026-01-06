@@ -2,10 +2,9 @@ name: Daily Market Radar (每日全景)
 
 on:
   schedule:
-    # 每天 UTC 21:30 运行 (相当于北京时间次日凌晨 5:30，美股收盘后)
-    # 周二到周六运行 (因为涵盖了周一到周五的交易日)
+    # 每天 UTC 21:30 (北京时间次日 05:30)
     - cron: '30 21 * * 2-6'
-  workflow_dispatch: # 允许你手动点击测试
+  workflow_dispatch: # 允许手动运行
 
 jobs:
   radar-job:
@@ -20,13 +19,13 @@ jobs:
       with:
         python-version: '3.11'
 
+    # 👇 这里改了！直接安装，不需要 requirements.txt
     - name: Install dependencies
       run: |
         pip install yfinance pandas requests
 
     - name: Run Market Radar
       env:
-        # 这里自动读取你之前设置好的邮箱密码，不用重设
         MAIL_USER: ${{ secrets.MAIL_USER }}
         MAIL_PASS: ${{ secrets.MAIL_PASS }}
         MAIL_TO: ${{ secrets.MAIL_TO }}
