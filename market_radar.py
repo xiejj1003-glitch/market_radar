@@ -29,7 +29,7 @@ def send_email(content):
 
     try:
         # ⚠️ 注意：这里是用 163 邮箱，如果你用 QQ 请改回 smtp.qq.com
-        smtp_obj = smtplib.SMTP_SSL('smtp.qq.com''smtp.qqq.com', 465) obj.login(mail_user, mail_pass)
+        smtp_obj = smtplib.SMTP_SSL('smtp.qq.com', 465) obj.login(mail_user, mail_pass)
         smtp_obj.sendmail(mail_user, [mail_to], message.as_string())
         print("✅ 战报已发送！")
         smtp_obj.quit()
